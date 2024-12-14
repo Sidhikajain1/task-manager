@@ -33,22 +33,16 @@ jobs:
         docker push $IMAGE_NAME
         echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV  # Save image name for next step
 
-    # Step 5: Set up Azure CLI
-    - name: Set up Azure CLI
-      uses: azure/setup-azurecli@v1
-      with:
-        azure-cli-version: '2.x'
-
-    # Step 6: Azure login using Service Principal
+    # Step 5: Azure login using Service Principal
     - name: Azure login
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    # Step 7: Update Azure Container App with the new Docker image
+    # Step 6: Update Azure Container App with the new Docker image
     - name: Update Azure Container App
       run: |
         az containerapp update \
-          --name task-manager3 \
+          --name task-manager4 \
           --resource-group Sahdev.ai \
           --image $IMAGE_NAME
